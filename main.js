@@ -1,18 +1,16 @@
 
-
 let key_row_1 = document.getElementById('key_row_1');
 let key_row_2 = document.getElementById('key_row_2');
 let key_row_3 = document.getElementById('key_row_3');
 let input_tag = document.getElementById('input_tag');
 
-let current_state = '';
-let target_word = '';
-
+let current_state = ''; //현재 state => setting_game, in_game, after_game
+let target_word = ''; // game에 쓰일 단어
 
 //init_game_seq에서 초기화 필요
-let target_word_state;
-let keyboard_input_state;
-let remaining_try = 7;
+let target_word_state; // 단어 내 맞은 글자 저장
+let keyboard_input_state; // 이미 입력된 키는 제외하기 위한 배열
+let remaining_try = 7; // 남은 시도 횟수
 
 function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가정
     console.log('in_game_key_event: ',input_char);
@@ -22,8 +20,6 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
         return;
     }
     keyboard_input_state[input_char.charCodeAt(0)-65] = 1;
-
-    remaining_try -= 1;
 
     let correct_idx = [];
     let key_correct_flag = false;
@@ -46,7 +42,9 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
         }
     }
     
-    if(!key_correct_flag){
+    if(!key_correct_flag){ // 틀리면
+        remaining_try -= 1;
+
         target_key.css({
             'background-color':'rgb(232, 61, 88)',
             'color': 'white',
@@ -91,8 +89,10 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
 function load_keyboard(){
     let keyboard_row_1 = [81, 87, 69, 82, 84, 89, 85, 73, 79, 80];
     let keyboard_row_2 = [65, 83, 68, 70, 71, 72, 74, 75, 76];
-    let keyboard_row_3 = [90, 88, 67, 86, 66, 78, 77];   
+    let keyboard_row_3 = [90, 88, 67, 86, 66, 78, 77];
+    //keyboard 배열 by ascii code
 
+    //keyboard 첫번째 row 만들기
     for(let ascii_key of keyboard_row_1){
         let key_char = String.fromCharCode(ascii_key);
 
@@ -111,6 +111,7 @@ function load_keyboard(){
         key_row_1.appendChild(key_pad);
     }
 
+    //keyboard 두번째 row 만들기
     for(let ascii_key of keyboard_row_2){
         let key_char = String.fromCharCode(ascii_key);
 
@@ -129,6 +130,7 @@ function load_keyboard(){
         key_row_2.appendChild(key_pad);
     }
 
+    //keyboard 세번째 row 만들기
     for(let ascii_key of keyboard_row_3){
         let key_char = String.fromCharCode(ascii_key);
 
@@ -160,6 +162,7 @@ function init_game_seq(){
 
         input_tile.className = 'input_tile';
         //input_tile.innerText = target_word[i]; //게임중 innerText 드래그하면 보이는 문제
+        input_tile.innerText = '.' // innerText 비워두면 input_tag 정렬이 틀어지는 문제가 있어서 default로 넣어둠
 
         input_tag.appendChild(input_tile);
     }
@@ -192,7 +195,6 @@ window.onkeydown = (e) => { // keyboard event, only alphabet, only active when i
     if(current_state !== 'in_game') return;
 
     console.log(e.key.toUpperCase(), e.key.length);
-
 
     if(e.key.length > 1) return; //special token => shift, capslock, enter ....
 
