@@ -25,8 +25,6 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
 
     remaining_try -= 1;
 
-
-
     let correct_idx = [];
     let key_correct_flag = false;
     let target_key = $('#key_'+input_char);
@@ -35,10 +33,13 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
         if(input_char === target_word[i]){
             key_correct_flag = true;
 
+            $('#input_tile_'+i).text(target_word[i]);
+
             target_key.css({
                 'background-color':'rgb(108, 168, 104)',
                 'color': 'white',
             });
+
 
             correct_idx.push(i);
             target_word_state[i] = 1;
@@ -90,7 +91,7 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
 function load_keyboard(){
     let keyboard_row_1 = [81, 87, 69, 82, 84, 89, 85, 73, 79, 80];
     let keyboard_row_2 = [65, 83, 68, 70, 71, 72, 74, 75, 76];
-    let keyboard_row_3 = [90, 88, 67, 86, 66, 78, 77];    
+    let keyboard_row_3 = [90, 88, 67, 86, 66, 78, 77];   
 
     for(let ascii_key of keyboard_row_1){
         let key_char = String.fromCharCode(ascii_key);
@@ -158,7 +159,7 @@ function init_game_seq(){
         console.log(input_tile.id);
 
         input_tile.className = 'input_tile';
-        input_tile.innerText = target_word[i];
+        //input_tile.innerText = target_word[i]; //게임중 innerText 드래그하면 보이는 문제
 
         input_tag.appendChild(input_tile);
     }
@@ -178,7 +179,6 @@ window.onload = () => {
     // A ~ Z 65 ~ 90
 
     load_keyboard(); // load keyboard
-
 
     // test line
     current_state = 'in_game'; 
