@@ -35,7 +35,11 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
                 'background-color':'rgb(108, 168, 104)',
                 'color': 'white',
             });
-
+        
+            $('#input_tile_'+i).css({
+                'border-width': '0px',
+                'border-radius': '5px',
+            });
 
             correct_idx.push(i);
             target_word_state[i] = 1;
