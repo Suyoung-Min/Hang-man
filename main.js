@@ -20,6 +20,7 @@ let try_num = 0;
 
 let game_result = []; //게임 결과 저장하여 finish_modal, share에 사용
 
+
 function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가정
     console.log('in_game_key_event: ',input_char);
 
@@ -172,6 +173,32 @@ function game_over(){
         }
 
         load_game_setting_modal();
+    });
+
+    let result_share_btn = document.getElementById('result_share_btn');
+    result_share_btn.addEventListener('click', e => {
+
+        let to_share_text = '----Hang-Man----\n\n\n';
+        let t = document.createElement('textarea');
+        document.body.appendChild(t);
+
+
+        for(let i=0; i < game_result.length; i++){
+            
+            for(let j=0; j < game_result[i].length; j++){
+                to_share_text += game_result[i][j]+' ';
+            }
+            to_share_text += '\n\n';
+        }
+
+        to_share_text += window.location.href;
+
+        console.log(to_share_text);
+
+        t.value = to_share_text;
+        t.select();
+        document.execCommand('copy');
+        document.body.removeChild(t);
     });
 
 
