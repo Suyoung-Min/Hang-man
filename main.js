@@ -118,6 +118,7 @@ function game_over(){
     alert('game is over');
 
     let game_result_div = document.getElementById('game_result_div');
+    game_result_div.innerHTML = '';
 
     for(let i=0; i < game_result.length; i++){
         let tmp_div = document.createElement('h4');
@@ -143,14 +144,35 @@ function game_over(){
     
     if(success_flag){
         console.log('game success!');
-        tmp_div.innerText = 'You win the game in '+try_num+' try' ;
+        tmp_div.innerText = 'You win the game in '+try_num+' tries' ;
 
     }else{
         console.log('game failed...');
-        tmp_div.innerText = 'You fail the game in '+try_num+' try' ;
+        tmp_div.innerText = 'You fail the game in '+try_num+' tries' ;
     }
 
     game_result_div.appendChild(tmp_div);
+
+    let to_main_btn = document.getElementById('to_main_btn')
+    to_main_btn.addEventListener('click', e => {
+        console.log('in the main_btn')
+
+        current_state = 'setting_game';
+
+        for(let i =65; i <= 90; i++){
+            let key_char = String.fromCharCode(i);
+
+            //let tmp_key = document.getElementById('key_'+key_char);
+
+            $('#key_'+key_char).css({
+                'background-color': '#D3D6DA',
+                'color':'black',
+            });
+
+        }
+
+        load_game_setting_modal();
+    });
 
 
     load_game_finish_modal();
@@ -297,6 +319,8 @@ window.onkeydown = (e) => { // keyboard event, only alphabet, only active when i
 //이 아래 부분은 modal창 추가 부분
 function load_game_setting_modal(){
     modalOn();
+    document.getElementById('setting_target_word_input').focus();
+
     game_setting_modal.style.display = 'block';
     menu_modal.style.display         = "none";
     game_finish_modal.style.display  = "none";
