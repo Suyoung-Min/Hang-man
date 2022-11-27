@@ -1,4 +1,9 @@
 
+const game_setting_modal = document.getElementById("game_setting_modal");
+const menu_modal = document.getElementById('menu_modal');
+const game_finish_modal = document.getElementById('game_finish_modal');
+const modal = document.getElementById('modal');
+
 let key_row_1 = document.getElementById('key_row_1');
 let key_row_2 = document.getElementById('key_row_2');
 let key_row_3 = document.getElementById('key_row_3');
@@ -83,11 +88,16 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
     }
 
     if(game_end_flag){
-        console.log('game is over!')
-        alert('game is over');
+        setTimeout(game_over, 1000);
     }
     
 
+}
+
+function game_over(){
+
+    console.log('game is over!')
+    alert('game is over');
 }
 
 function load_keyboard(){
@@ -187,14 +197,21 @@ window.onload = () => {
 
     load_keyboard(); // load keyboard
 
+    load_game_setting_modal();
+    //load_menu_modal();
+    //load_game_finish_modal();
+
     // test line
-    current_state = 'in_game'; 
-    target_word = 'WORLDWORLD';
-    init_game_seq();
+    current_state = 'setting_game'; 
+    //init_game_seq();
 
 };
 
 window.onkeydown = (e) => { // keyboard event, only alphabet, only active when in_game_state
+    const evTarget = e.target
+    if(isModalOn() && e.key === "Escape") {
+        modalOff()
+    }
 
     if(current_state !== 'in_game') return;
 
@@ -212,3 +229,62 @@ window.onkeydown = (e) => { // keyboard event, only alphabet, only active when i
     in_game_key_event(input_char);
 
 }
+
+
+//이 부분은 modal창 추가 부분
+function load_game_setting_modal(){
+    modalOn();
+    game_setting_modal.style.display = 'block';
+    menu_modal.style.display         = "none";
+    game_finish_modal.style.display  = "none";
+
+
+
+}
+function load_menu_modal(){
+    modalOn();
+    game_setting_modal.style.display = 'none';
+    menu_modal.style.display         = "block";
+    game_finish_modal.style.display  = "none";
+}
+function load_game_finish_modal(){
+    modalOn();
+    game_setting_modal.style.display = 'none';
+    menu_modal.style.display         = "none";
+    game_finish_modal.style.display  = "block";
+}
+
+
+function modalOn() {
+    modal.style.display = "flex"
+}
+function isModalOn() {
+    return modal.style.display === "flex"
+}
+function modalOff() {
+    modal.style.display = "none"
+}
+
+const btnModal = document.getElementById("btn_menu_modal")
+btnModal.addEventListener("click", e => {
+    modalOn();
+    load_menu_modal();
+})
+
+const closeBtn = modal.querySelector(".close-area")
+closeBtn.addEventListener("click", e => {
+    console.log('close area');
+    modalOff()
+})
+
+const btn_option_1 = document.getElementById('btn_option_1');
+btn_option_1.addEventListener("click", e => {
+    const target_word_input = document.getElementById('setting_target_word_input');
+    target_word = target_word_input.value.toUpperCase();
+    target_word_input.value = '';
+
+    modalOff();
+
+    current_state = 'in_game';
+    init_game_seq();
+})
