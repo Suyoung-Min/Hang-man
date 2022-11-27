@@ -161,22 +161,8 @@ function game_over(){
     let to_main_btn = document.getElementById('to_main_btn')
     to_main_btn.addEventListener('click', e => {
         console.log('in the main_btn')
-
-        current_state = 'setting_game';
-
-        for(let i =65; i <= 90; i++){
-            let key_char = String.fromCharCode(i);
-
-            //let tmp_key = document.getElementById('key_'+key_char);
-
-            $('#key_'+key_char).css({
-                'background-color': '#D3D6DA',
-                'color':'black',
-            });
-
-        }
-
-        load_game_setting_modal();
+        
+        to_main_func();
     });
 
     let result_share_btn = document.getElementById('result_share_btn');
@@ -321,10 +307,8 @@ window.onload = () => {
     //load_menu_modal();
     //load_game_finish_modal();
 
-    // test line
     current_state = 'setting_game'; 
     //init_game_seq();
-
 };
 
 window.onkeydown = (e) => { // keyboard event, only alphabet, only active when in_game_state
@@ -419,6 +403,23 @@ function game_init_event_level(level){
     init_game_seq();
 }
 
+function to_main_func(){
+    current_state = 'setting_game';
+
+    for(let i =65; i <= 90; i++){
+        let key_char = String.fromCharCode(i);
+
+
+        $('#key_'+key_char).css({
+            'background-color': '#D3D6DA',
+            'color':'black',
+        });
+
+    }
+
+    load_game_setting_modal();
+}
+
 const btnModal = document.getElementById("btn_menu_modal")
 btnModal.addEventListener("click", e => {
     modalOn();
@@ -431,9 +432,14 @@ closeBtn.addEventListener("click", e => {
     modalOff()
 })
 
-const btn_option_1 = document.getElementById('btn_option_1');
-btn_option_1.addEventListener("click", e => {
+const btn_option_custom = document.getElementById('btn_option_custom');
+btn_option_custom.addEventListener("click", e => {
     game_init_event();
+});
+
+const restart_btn = document.getElementById('restart_btn')
+restart_btn.addEventListener('click', e => {
+    to_main_func();
 });
 
 function game_init_event(){
