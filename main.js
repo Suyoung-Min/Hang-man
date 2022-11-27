@@ -20,6 +20,10 @@ let try_num = 0;
 
 let game_result = []; //게임 결과 저장하여 finish_modal, share에 사용
 
+//const word_json = JSON.parse('parsed.json'); // 단어장
+let word_json=[];
+
+
 
 function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가정
     console.log('in_game_key_event: ',input_char);
@@ -299,9 +303,17 @@ function init_game_seq(){
     
 }
 
+
+
 window.onload = () => {
 
     // A ~ Z 65 ~ 90
+
+    $.getJSON('./parsed.json', (data) => {
+        $.each(data, (i, item) => {
+            word_json.push(item);
+        } )
+    })
 
     load_keyboard(); // load keyboard
 
@@ -352,7 +364,6 @@ function load_game_setting_modal(){
     menu_modal.style.display         = "none";
     game_finish_modal.style.display  = "none";
 
-
 }
 function load_menu_modal(){
     modalOn();
@@ -376,6 +387,36 @@ function isModalOn() {
 }
 function modalOff() {
     modal.style.display = "none"
+}
+
+const btn_option_Easy = document.getElementById('btn_option_Easy');
+btn_option_Easy.addEventListener('click', e => {
+    game_init_event_level(0);
+});
+const btn_option_Medium = document.getElementById('btn_option_Medium');
+btn_option_Medium.addEventListener('click', e => {
+    game_init_event_level(1);
+});
+const btn_option_Hard = document.getElementById('btn_option_Hard');
+btn_option_Hard.addEventListener('click', e => {
+    game_init_event_level(2);
+});
+
+function game_init_event_level(level){
+    const target_word_input = document.getElementById('setting_target_word_input');
+    target_word_input.value = '';
+
+    let idx_range = word_json[level].length;
+
+    let target_idx = Math.floor(Math.random() * idx_range);
+
+    target_word = word_json[level][target_idx].toUpperCase();
+    console.log('Level '+level+' target word is ',target_word);
+
+    modalOff();
+
+    current_state = 'in_game';
+    init_game_seq();
 }
 
 const btnModal = document.getElementById("btn_menu_modal")
