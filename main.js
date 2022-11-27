@@ -16,6 +16,9 @@ let target_word = ''; // game에 쓰일 단어
 let target_word_state; // 단어 내 맞은 글자 저장
 let keyboard_input_state; // 이미 입력된 키는 제외하기 위한 배열
 let remaining_try = 7; // 남은 시도 횟수
+let try_num = 0;
+
+let game_result = []; //게임 결과 저장하여 finish_modal, share에 사용
 
 function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가정
     console.log('in_game_key_event: ',input_char);
@@ -29,6 +32,16 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
     let correct_idx = [];
     let key_correct_flag = false;
     let target_key = $('#key_'+input_char);
+
+    try_num += 1;
+
+    let try_result = [];
+    if(game_result.length === 0){
+        for(let i=0; i < target_word.length; i++) try_result.push('_');
+    }else{
+        try_result = game_result[game_result.length-1].slice();
+    }
+
 
     for(let i=0; i<target_word.length; i++){
         if(input_char === target_word[i]){
@@ -48,8 +61,12 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
 
             correct_idx.push(i);
             target_word_state[i] = 1;
+
+            try_result[i] = target_word[i];
         }
     }
+
+    game_result.push(try_result);
     
     if(!key_correct_flag){ // 틀리면
         remaining_try -= 1;
@@ -73,7 +90,8 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
     //game ending condition > all correct or remaining_try === 0
     console.log(target_word_state);
     console.log(keyboard_input_state);
-
+    console.log(try_result);
+    console.log(game_result);
 
     let game_end_flag = true;
     for(let char_state of target_word_state){
@@ -98,6 +116,67 @@ function game_over(){
 
     console.log('game is over!')
     alert('game is over');
+
+    let game_result_div = document.getElementById('game_result_div');
+    game_result_div.innerHTML = '';
+
+    for(let i=0; i < game_result.length; i++){
+        let tmp_div = document.createElement('h4');
+        
+        for(let j=0; j < game_result[i].length; j++){
+            tmp_div.innerText += game_result[i][j]+' ';
+        }
+        game_result_div.appendChild(tmp_div);
+    }
+
+
+    let tmp_div = document.createElement('h4');
+
+    game_result[game_result.length-1];
+
+    let success_flag = true;
+    for(let i = 0 ; i < target_word.length; i++){
+        if(game_result[game_result.length-1][i] === '_'){
+            success_flag = false;
+            break;
+        }
+    }
+    
+    if(success_flag){
+        console.log('game success!');
+        tmp_div.innerText = 'You win the game in '+try_num+' tries' ;
+
+    }else{
+        console.log('game failed...');
+        tmp_div.innerText = 'You fail the game in '+try_num+' tries' ;
+    }
+
+    game_result_div.appendChild(tmp_div);
+
+    let to_main_btn = document.getElementById('to_main_btn')
+    to_main_btn.addEventListener('click', e => {
+        console.log('in the main_btn')
+
+        current_state = 'setting_game';
+
+        for(let i =65; i <= 90; i++){
+            let key_char = String.fromCharCode(i);
+
+            //let tmp_key = document.getElementById('key_'+key_char);
+
+            $('#key_'+key_char).css({
+                'background-color': '#D3D6DA',
+                'color':'black',
+            });
+
+        }
+
+        load_game_setting_modal();
+    });
+
+
+    load_game_finish_modal();
+
 }
 
 function load_keyboard(){
@@ -187,7 +266,9 @@ function init_game_seq(){
     keyboard_input_state = [];
     for(let i=0; i<26; i++) keyboard_input_state.push(0);
 
-    remaining_try = 7;
+    remaining_try = 7; //남은 시도 횟수
+    try_num = 0; //시도한 횟수
+    game_result = []; //게임 과정 저장
     
 }
 
@@ -213,6 +294,10 @@ window.onkeydown = (e) => { // keyboard event, only alphabet, only active when i
         modalOff()
     }
 
+    if(current_state === 'setting_game' && e.key === "Enter"){//enter event
+        game_init_event(); 
+    }
+
     if(current_state !== 'in_game') return;
 
     console.log(e.key.toUpperCase(), e.key.length);
@@ -231,13 +316,14 @@ window.onkeydown = (e) => { // keyboard event, only alphabet, only active when i
 }
 
 
-//이 부분은 modal창 추가 부분
+//이 아래 부분은 modal창 추가 부분
 function load_game_setting_modal(){
     modalOn();
+    document.getElementById('setting_target_word_input').focus();
+
     game_setting_modal.style.display = 'block';
     menu_modal.style.display         = "none";
     game_finish_modal.style.display  = "none";
-
 
 
 }
@@ -254,7 +340,7 @@ function load_game_finish_modal(){
     game_finish_modal.style.display  = "block";
 }
 
-
+//modal창 관련 함수
 function modalOn() {
     modal.style.display = "flex"
 }
@@ -279,12 +365,19 @@ closeBtn.addEventListener("click", e => {
 
 const btn_option_1 = document.getElementById('btn_option_1');
 btn_option_1.addEventListener("click", e => {
+    game_init_event();
+});
+
+function game_init_event(){
     const target_word_input = document.getElementById('setting_target_word_input');
     target_word = target_word_input.value.toUpperCase();
+
+    if(target_word.length === 0) return;
+
     target_word_input.value = '';
 
     modalOff();
 
     current_state = 'in_game';
     init_game_seq();
-})
+}
