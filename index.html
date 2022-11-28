@@ -29,7 +29,7 @@
         </div>
       </nav>
 
-    <div id="main_part" >
+    <div id="main_part" class="container">
         <div id="hang_man_img_part" >
 
         </div>
@@ -50,48 +50,56 @@
     <div id="modal" class="modal modal-overlay">
         <div id="game_setting_modal" class="modal-window">
             <div class="title">
-                <h2>Hang-man</h2>
+                <h2>Hang-Man</h2>
             </div>
             <div class="content">
                 <h3>
-                    1. Set target word
+                    1. Set custom word
                 </h3>
-                <input type="text" id="setting_target_word_input">
-                <button id="btn_option_1">Start</button>
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                
+                <input type="text" id="setting_target_word_input" class="form-control">
+                <button id="btn_option_custom" class="btn btn-secondary">
+                    &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Start by custom word
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                    <br><br><br>
+                <h3>
+                    2. Set Level of word
+                </h3>
+                <button id="btn_option_Easy" class="btn btn-secondary">
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Easy
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button><p></p>
+                <button id="btn_option_Medium" class="btn btn-secondary">
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Medium
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button><p></p>
+                <button id="btn_option_Hard" class="btn btn-secondary">
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Hard
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button><p></p>
             </div>
         </div>
 
         <div id="menu_modal" class="modal modal-window">
             <div class="title">
-                <h2>menu_modal</h2>
+                <h2>MENU</h2>
             </div>
             <div class="close-area">X</div>
             <div class="content">
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                
+                <br><br><br>
+                <button id="restart_btn" class="btn btn-light">Restart?</button>
             </div>
         </div>
 
         <div id="game_finish_modal" class="modal modal-window">
             <div class="title">
-                <h2>game_finish_modal</h2>
+                <h2>Game is finished!</h2>
             </div>
-            <div class="close-area">X</div>
             <div class="content">
-                <div>
-                    1. Set target word
-                </div>
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                
+                <div id="game_result_div"></div>
+                <br><br>
+                <button id="result_share_btn" class="btn btn-secondary">Share</button>
+                <button id="to_main_btn" class="btn btn-success">Main</button>
             </div>
         </div>
 

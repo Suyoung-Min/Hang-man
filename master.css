@@ -117,3 +117,7 @@ body{
     text-shadow: 1px 1px 2px gray;
     color: white;
 }
+
+#btn_option_1{
+    width: inherit;
+}
