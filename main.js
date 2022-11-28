@@ -98,6 +98,20 @@ function game_over(){
 
     console.log('game is over!')
     alert('game is over');
+    for(let i=0; i<target_word.length; i++){
+        target_key.css({
+            'background-color':'rgb(0, 0, 0)',
+            'color': 'purple',
+        });
+    }
+    init_game_seq()
+    key_row_1 = [];
+    key_row_2 = [];
+    key_row_3 = [];
+    correct_idx = [];
+    load_keyboard();
+    load_game_setting_modal();
+    current_state = 'setting_game'; 
 }
 
 function load_keyboard(){
