@@ -75,6 +75,7 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
     
     if(!key_correct_flag){ // 틀리면
         remaining_try -= 1;
+        document.getElementById("trial").innerText = "Remained Trial: "+ remaining_try;
 
         target_key.css({
             'background-color':'rgb(232, 61, 88)',
@@ -121,22 +122,6 @@ function game_over(){
 
     console.log('game is over!')
     alert('game is over');
-<<<<<<< HEAD
-    for(let i=0; i<target_word.length; i++){
-        target_key.css({
-            'background-color':'rgb(0, 0, 0)',
-            'color': 'purple',
-        });
-    }
-    init_game_seq()
-    key_row_1 = [];
-    key_row_2 = [];
-    key_row_3 = [];
-    correct_idx = [];
-    load_keyboard();
-    load_game_setting_modal();
-    current_state = 'setting_game'; 
-=======
 
     let game_result_div = document.getElementById('game_result_div');
     game_result_div.innerHTML = '';
@@ -210,7 +195,6 @@ function game_over(){
 
     load_game_finish_modal();
 
->>>>>>> 07cfeb4af105c85e0cd4ee18ed7268b0f3258ea7
 }
 
 function load_keyboard(){
@@ -303,7 +287,7 @@ function init_game_seq(){
     remaining_try = 7; //남은 시도 횟수
     try_num = 0; //시도한 횟수
     game_result = []; //게임 과정 저장
-    
+    document.getElementById("trial").innerText = "Remained Trial: "+ remaining_try;
 }
 
 
