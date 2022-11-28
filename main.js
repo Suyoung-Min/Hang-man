@@ -139,8 +139,12 @@ function game_over(){
         }
         game_result_div.appendChild(tmp_div);
     }
-
-
+    let tmp_div1 = document.createElement('h4');
+    for(let i = 0; i < target_word.length; i++){
+        tmp_div1.innerText += target_word[i]+' ';
+    }
+    game_result_div.appendChild(tmp_div1)
+    
     let tmp_div = document.createElement('h4');
 
     game_result[game_result.length-1];
@@ -396,7 +400,7 @@ btn_option_Hard.addEventListener('click', e => {
 function game_init_event_level(level){
     const target_word_input = document.getElementById('setting_target_word_input');
     target_word_input.value = '';
-
+    
     let idx_range = word_json[level].length;
 
     let target_idx = Math.floor(Math.random() * idx_range);
