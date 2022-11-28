@@ -1,31 +1,28 @@
-
-
-
-body{
+body {
     text-align: center;
 }
 
-#main_part{
+#main_part {
     width: 800px;
-    
+
     display: inline-block;
 }
 
-#hang_man_img_part{
+#hang_man_img_part {
     height: 400px;
-    
+
 }
 
-#target_word_tag_part{
+#target_word_tag_part {
     height: 100px;
 
 }
 
-#key_board{
+#key_board {
     text-align: center;
 }
 
-.key_pad{
+.key_pad {
     width: 43px;
     height: 58px;
 
@@ -39,11 +36,11 @@ body{
     margin: 2px;
 }
 
-#input_tag{
+#input_tag {
     text-align: center;
 }
 
-.input_tile{
+.input_tile {
     display: inline-block;
 
     width: 50px;
@@ -54,7 +51,7 @@ body{
     border-color: #D3D6DA;
 
     margin: 5px;
-    
+
     font-size: 30px;
     font-weight: bolder;
 
@@ -79,29 +76,33 @@ body{
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
 .modal .modal-window {
-    background: rgba( 69, 139, 197, 0.70 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 13.5px );
-    -webkit-backdrop-filter: blur( 13.5px );
+    background: rgba(69, 139, 197, 0.70);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
     border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border: 1px solid rgba(255, 255, 255, 0.18);
     width: 400px;
     height: 500px;
     position: relative;
     top: -100px;
     padding: 10px;
 }
+
 .modal .title {
     padding-left: 10px;
     display: inline;
     text-shadow: 1px 1px 2px gray;
     color: white;
-    
+
 }
+
 .modal .title h2 {
     display: inline;
 }
+
 .modal .close-area {
     display: inline;
     float: right;
@@ -118,6 +119,20 @@ body{
     color: white;
 }
 
-#btn_option_1{
+#btn_option_1 {
     width: inherit;
+}
+
+.tooltip_msg {
+    position: absolute;
+    left:80px;
+    width: 238px;
+    height: 40px;
+    margin-top: 5px;
+    padding: 10px;
+    background-color: #0099ff;
+    font-weight: bold;
+    font-size:13px;
+    border-radius: 10px;
+    visibility:hidden;
 }

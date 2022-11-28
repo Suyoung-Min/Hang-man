@@ -17,49 +17,48 @@ let target_word_state; // 단어 내 맞은 글자 저장
 let keyboard_input_state; // 이미 입력된 키는 제외하기 위한 배열
 let remaining_try = 7; // 남은 시도 횟수
 let try_num = 0;
-
 let game_result = []; //게임 결과 저장하여 finish_modal, share에 사용
 
 //const word_json = JSON.parse('parsed.json'); // 단어장
-let word_json=[];
+let word_json = [];
 
 
 
-function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가정
-    console.log('in_game_key_event: ',input_char);
+function in_game_key_event(input_char) { // Upper alphabet만 들어왔다고 가정
+    console.log('in_game_key_event: ', input_char);
 
     //이미 입력한 글자는 제외 code add
-    if(keyboard_input_state[input_char.charCodeAt(0)-65] === 1){
+    if (keyboard_input_state[input_char.charCodeAt(0) - 65] === 1) {
         return;
     }
-    keyboard_input_state[input_char.charCodeAt(0)-65] = 1;
+    keyboard_input_state[input_char.charCodeAt(0) - 65] = 1;
 
     let correct_idx = [];
     let key_correct_flag = false;
-    let target_key = $('#key_'+input_char);
+    let target_key = $('#key_' + input_char);
 
     try_num += 1;
 
     let try_result = [];
-    if(game_result.length === 0){
-        for(let i=0; i < target_word.length; i++) try_result.push('_');
-    }else{
-        try_result = game_result[game_result.length-1].slice();
+    if (game_result.length === 0) {
+        for (let i = 0; i < target_word.length; i++) try_result.push('_');
+    } else {
+        try_result = game_result[game_result.length - 1].slice();
     }
 
 
-    for(let i=0; i<target_word.length; i++){
-        if(input_char === target_word[i]){
+    for (let i = 0; i < target_word.length; i++) {
+        if (input_char === target_word[i]) {
             key_correct_flag = true;
 
-            $('#input_tile_'+i).text(target_word[i]);
+            $('#input_tile_' + i).text(target_word[i]);
 
             target_key.css({
-                'background-color':'rgb(108, 168, 104)',
+                'background-color': 'rgb(108, 168, 104)',
                 'color': 'white',
             });
-        
-            $('#input_tile_'+i).css({
+
+            $('#input_tile_' + i).css({
                 'border-width': '0px',
                 'border-radius': '5px',
             });
@@ -72,30 +71,30 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
     }
 
     game_result.push(try_result);
-    
-    if(!key_correct_flag){ // 틀리면
+
+    if (!key_correct_flag) { // 틀리면
         remaining_try -= 1;
-        document.getElementById("trial").innerText = "Remained Trial: "+ remaining_try;
-        if(remaining_try === 6) document.getElementById("hangman_image").src = "./img/hangman_6.png";
-        else if(remaining_try === 5) document.getElementById("hangman_image").src = "./img/hangman_5.png";
-        else if(remaining_try === 4) document.getElementById("hangman_image").src = "./img/hangman_4.png";
-        else if(remaining_try === 3) document.getElementById("hangman_image").src = "./img/hangman_3.png";
-        else if(remaining_try === 2) document.getElementById("hangman_image").src = "./img/hangman_2.png";
-        else if(remaining_try === 1) document.getElementById("hangman_image").src = "./img/hangman_1.png";
-        else if(remaining_try === 0) document.getElementById("hangman_image").src = "";
+        document.getElementById("trial").innerText = "Remained Trial: " + remaining_try;
+        if (remaining_try === 6) document.getElementById("hangman_image").src = "./img/hangman_6.png";
+        else if (remaining_try === 5) document.getElementById("hangman_image").src = "./img/hangman_5.png";
+        else if (remaining_try === 4) document.getElementById("hangman_image").src = "./img/hangman_4.png";
+        else if (remaining_try === 3) document.getElementById("hangman_image").src = "./img/hangman_3.png";
+        else if (remaining_try === 2) document.getElementById("hangman_image").src = "./img/hangman_2.png";
+        else if (remaining_try === 1) document.getElementById("hangman_image").src = "./img/hangman_1.png";
+        else if (remaining_try === 0) document.getElementById("hangman_image").src = "";
         target_key.css({
-            'background-color':'rgb(232, 61, 88)',
+            'background-color': 'rgb(232, 61, 88)',
             'color': 'white',
         });
     }
 
     console.log(correct_idx);
 
-    for(let idx of correct_idx){
-        let target_tile = $('#input_tile_'+idx)
+    for (let idx of correct_idx) {
+        let target_tile = $('#input_tile_' + idx)
 
         target_tile.css({
-            'background-color':'rgb(108, 168, 104)'
+            'background-color': 'rgb(108, 168, 104)'
         });
     }
 
@@ -106,64 +105,64 @@ function in_game_key_event(input_char){ // Upper alphabet만 들어왔다고 가
     console.log(game_result);
 
     let game_end_flag = true;
-    for(let char_state of target_word_state){
-        if(char_state === 0){
+    for (let char_state of target_word_state) {
+        if (char_state === 0) {
             game_end_flag = false;
             break;
         }
     }
 
-    if(remaining_try === 0){
+    if (remaining_try === 0) {
         game_end_flag = true;
     }
 
-    if(game_end_flag){
+    if (game_end_flag) {
         setTimeout(game_over, 1000);
     }
-    
+
 
 }
 
-function game_over(){
+function game_over() {
     console.log('game is over!')
     alert('game is over');
 
     let game_result_div = document.getElementById('game_result_div');
     game_result_div.innerHTML = '';
 
-    for(let i=0; i < game_result.length; i++){
+    for (let i = 0; i < game_result.length; i++) {
         let tmp_div = document.createElement('h4');
-        
-        for(let j=0; j < game_result[i].length; j++){
-            tmp_div.innerText += game_result[i][j]+' ';
+
+        for (let j = 0; j < game_result[i].length; j++) {
+            tmp_div.innerText += game_result[i][j] + ' ';
         }
         game_result_div.appendChild(tmp_div);
     }
     let tmp_div1 = document.createElement('h4');
-    for(let i = 0; i < target_word.length; i++){
-        tmp_div1.innerText += target_word[i]+' ';
+    for (let i = 0; i < target_word.length; i++) {
+        tmp_div1.innerText += target_word[i] + ' ';
     }
     game_result_div.appendChild(tmp_div1)
-    
+
     let tmp_div = document.createElement('h4');
 
-    game_result[game_result.length-1];
+    game_result[game_result.length - 1];
 
     let success_flag = true;
-    for(let i = 0 ; i < target_word.length; i++){
-        if(game_result[game_result.length-1][i] === '_'){
+    for (let i = 0; i < target_word.length; i++) {
+        if (game_result[game_result.length - 1][i] === '_') {
             success_flag = false;
             break;
         }
     }
-    
-    if(success_flag){
-        console.log('game success!');
-        tmp_div.innerText = 'You win the game in '+try_num+' tries' ;
 
-    }else{
+    if (success_flag) {
+        console.log('game success!');
+        tmp_div.innerText = 'You win the game in ' + try_num + ' tries';
+
+    } else {
         console.log('game failed...');
-        tmp_div.innerText = 'You fail the game in '+try_num+' tries' ;
+        tmp_div.innerText = 'You fail the game in ' + try_num + ' tries';
     }
 
     game_result_div.appendChild(tmp_div);
@@ -171,7 +170,7 @@ function game_over(){
     let to_main_btn = document.getElementById('to_main_btn')
     to_main_btn.addEventListener('click', e => {
         console.log('in the main_btn')
-        
+
         to_main_func();
     });
 
@@ -183,10 +182,10 @@ function game_over(){
         document.body.appendChild(t);
 
 
-        for(let i=0; i < game_result.length; i++){
-            
-            for(let j=0; j < game_result[i].length; j++){
-                to_share_text += game_result[i][j]+' ';
+        for (let i = 0; i < game_result.length; i++) {
+
+            for (let j = 0; j < game_result[i].length; j++) {
+                to_share_text += game_result[i][j] + ' ';
             }
             to_share_text += '\n\n';
         }
@@ -206,25 +205,25 @@ function game_over(){
 
 }
 
-function load_keyboard(){
+function load_keyboard() {
     let keyboard_row_1 = [81, 87, 69, 82, 84, 89, 85, 73, 79, 80];
     let keyboard_row_2 = [65, 83, 68, 70, 71, 72, 74, 75, 76];
     let keyboard_row_3 = [90, 88, 67, 86, 66, 78, 77];
     //keyboard 배열 by ascii code
 
     //keyboard 첫번째 row 만들기
-    for(let ascii_key of keyboard_row_1){
+    for (let ascii_key of keyboard_row_1) {
         let key_char = String.fromCharCode(ascii_key);
 
         let key_pad = document.createElement('button');
 
 
-        key_pad.id = 'key_'+ key_char;
+        key_pad.id = 'key_' + key_char;
         key_pad.className = 'key_pad';
-        key_pad.innerText =  key_char;
+        key_pad.innerText = key_char;
 
         key_pad.onclick = () => {
-            console.log('key_pad onclick: ',key_char);
+            console.log('key_pad onclick: ', key_char);
             in_game_key_event(key_char);
         }
 
@@ -232,18 +231,18 @@ function load_keyboard(){
     }
 
     //keyboard 두번째 row 만들기
-    for(let ascii_key of keyboard_row_2){
+    for (let ascii_key of keyboard_row_2) {
         let key_char = String.fromCharCode(ascii_key);
 
         let key_pad = document.createElement('button');
 
 
-        key_pad.id = 'key_'+ key_char;
+        key_pad.id = 'key_' + key_char;
         key_pad.className = 'key_pad';
-        key_pad.innerText =  key_char;
+        key_pad.innerText = key_char;
 
         key_pad.onclick = () => {
-            console.log('key_pad onclick: ',key_char);
+            console.log('key_pad onclick: ', key_char);
             in_game_key_event(key_char);
         }
 
@@ -251,18 +250,18 @@ function load_keyboard(){
     }
 
     //keyboard 세번째 row 만들기
-    for(let ascii_key of keyboard_row_3){
+    for (let ascii_key of keyboard_row_3) {
         let key_char = String.fromCharCode(ascii_key);
 
         let key_pad = document.createElement('button');
 
 
-        key_pad.id = 'key_'+ key_char;
+        key_pad.id = 'key_' + key_char;
         key_pad.className = 'key_pad';
-        key_pad.innerText =  key_char;
+        key_pad.innerText = key_char;
 
         key_pad.onclick = () => {
-            console.log('key_pad onclick: ',key_char);
+            console.log('key_pad onclick: ', key_char);
             in_game_key_event(key_char);
         }
 
@@ -270,11 +269,11 @@ function load_keyboard(){
     }
 }
 
-function init_game_seq(){
+function init_game_seq() {
     //input_tag
 
     input_tag.innerHTML = '';
-    for(let i = 0; i<target_word.length; i++){
+    for (let i = 0; i < target_word.length; i++) {
         let input_tile = document.createElement('div');
 
         input_tile.id = 'input_tile_' + i;
@@ -288,16 +287,16 @@ function init_game_seq(){
     }
 
     target_word_state = [];
-    for(let i=0; i<target_word.length; i++) target_word_state.push(0);
+    for (let i = 0; i < target_word.length; i++) target_word_state.push(0);
 
     keyboard_input_state = [];
-    for(let i=0; i<26; i++) keyboard_input_state.push(0);
+    for (let i = 0; i < 26; i++) keyboard_input_state.push(0);
 
     remaining_try = 7; //남은 시도 횟수
     try_num = 0; //시도한 횟수
     game_result = []; //게임 과정 저장
     document.getElementById("hangman_image").src = "./img/hangman_7.png";
-    document.getElementById("trial").innerText = "Remained Trial: "+ remaining_try;
+    document.getElementById("trial").innerText = "Remained Trial: " + remaining_try;
 }
 
 
@@ -309,7 +308,7 @@ window.onload = () => {
     $.getJSON('./parsed.json', (data) => {
         $.each(data, (i, item) => {
             word_json.push(item);
-        } )
+        })
     })
 
     load_keyboard(); // load keyboard
@@ -318,32 +317,32 @@ window.onload = () => {
     //load_menu_modal();
     //load_game_finish_modal();
 
-    current_state = 'setting_game'; 
+    current_state = 'setting_game';
     //init_game_seq();
 };
 
 window.onkeydown = (e) => { // keyboard event, only alphabet, only active when in_game_state
     const evTarget = e.target
-    if(isModalOn() && e.key === "Escape") {
+    if (isModalOn() && e.key === "Escape") {
         modalOff()
     }
 
-    if(current_state === 'setting_game' && e.key === "Enter"){//enter event
-        game_init_event(); 
+    if (current_state === 'setting_game' && e.key === "Enter") {//enter event
+        game_init_event();
     }
 
-    if(current_state !== 'in_game') return;
+    if (current_state !== 'in_game') return;
 
     console.log(e.key.toUpperCase(), e.key.length);
 
-    if(e.key.length > 1) return; //special token => shift, capslock, enter ....
+    if (e.key.length > 1) return; //special token => shift, capslock, enter ....
 
     let input_char = e.key.toUpperCase();
     let input_ascii = input_char.charCodeAt(0);
 
     console.log(input_char, input_ascii);
 
-    if( input_ascii < 65 || 90 < input_ascii ) return; // not alphabet exception
+    if (input_ascii < 65 || 90 < input_ascii) return; // not alphabet exception
 
     in_game_key_event(input_char);
 
@@ -351,26 +350,26 @@ window.onkeydown = (e) => { // keyboard event, only alphabet, only active when i
 
 
 //이 아래 부분은 modal창 추가 부분
-function load_game_setting_modal(){
+function load_game_setting_modal() {
     modalOn();
     document.getElementById('setting_target_word_input').focus();
 
     game_setting_modal.style.display = 'block';
-    menu_modal.style.display         = "none";
-    game_finish_modal.style.display  = "none";
+    menu_modal.style.display = "none";
+    game_finish_modal.style.display = "none";
 
 }
-function load_menu_modal(){
+function load_menu_modal() {
     modalOn();
     game_setting_modal.style.display = 'none';
-    menu_modal.style.display         = "block";
-    game_finish_modal.style.display  = "none";
+    menu_modal.style.display = "block";
+    game_finish_modal.style.display = "none";
 }
-function load_game_finish_modal(){
+function load_game_finish_modal() {
     modalOn();
     game_setting_modal.style.display = 'none';
-    menu_modal.style.display         = "none";
-    game_finish_modal.style.display  = "block";
+    menu_modal.style.display = "none";
+    game_finish_modal.style.display = "block";
 }
 
 //modal창 관련 함수
@@ -397,16 +396,16 @@ btn_option_Hard.addEventListener('click', e => {
     game_init_event_level(2);
 });
 
-function game_init_event_level(level){
+function game_init_event_level(level) {
     const target_word_input = document.getElementById('setting_target_word_input');
     target_word_input.value = '';
-    
+
     let idx_range = word_json[level].length;
 
     let target_idx = Math.floor(Math.random() * idx_range);
 
     target_word = word_json[level][target_idx].toUpperCase();
-    console.log('Level '+level+' target word is ',target_word);
+    console.log('Level ' + level + ' target word is ', target_word);
 
     modalOff();
 
@@ -414,16 +413,16 @@ function game_init_event_level(level){
     init_game_seq();
 }
 
-function to_main_func(){
+function to_main_func() {
     current_state = 'setting_game';
 
-    for(let i =65; i <= 90; i++){
+    for (let i = 65; i <= 90; i++) {
         let key_char = String.fromCharCode(i);
 
 
-        $('#key_'+key_char).css({
+        $('#key_' + key_char).css({
             'background-color': '#D3D6DA',
-            'color':'black',
+            'color': 'black',
         });
 
     }
@@ -453,11 +452,25 @@ restart_btn.addEventListener('click', e => {
     to_main_func();
 });
 
-function game_init_event(){
+function is_input_valid(target_word_input) // input이 영어인지 확인
+{
+    if(target_word_input.value.length ===0)
+        return true;
+    let isalphabet = /^[a-z|A-Z]+$/;
+    if (!isalphabet.test(target_word_input.value)) {
+        return false;
+    }
+    return true;
+}
+function game_init_event() {
     const target_word_input = document.getElementById('setting_target_word_input');
+
+    if (!is_input_valid(target_word_input)) {
+        return;
+    }
     target_word = target_word_input.value.toUpperCase();
 
-    if(target_word.length === 0) return;
+    if (target_word.length === 0) return;
 
     target_word_input.value = '';
 
@@ -465,4 +478,41 @@ function game_init_event(){
 
     current_state = 'in_game';
     init_game_seq();
+}
+
+$(document).ready(function () {
+    openTooltip('.btn', '.tooltip_msg');
+});
+function openTooltip(selector, layer) {
+
+    var $layer = $(layer);
+
+    // 툴팁버튼 처리
+    $(selector).on('click', function () {
+        $layer.toggleClass('on');
+    });
+
+    function overTooltip() {
+
+        var $this = $(selector);
+
+        // 마우스 떠날시 툴팁 레이어 숨김
+        $this.on("", function () {
+            if (!$layer.hasClass('on')) {
+                $(this).next(layer).hide();
+            }
+        })
+        // 한글 입력 시 툴팁 레이어 노출
+        $this.on('click', function () {
+            if (!is_input_valid(document.getElementById('setting_target_word_input'))) {
+                $(this).next(layer).css({
+                    "visibility": "visible"
+                });
+                $(this).next(layer).show();
+            }
+        })
+
+
+    }
+    overTooltip();
 }
