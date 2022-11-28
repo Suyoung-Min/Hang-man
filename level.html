@@ -28,16 +28,21 @@
     </nav>
 
     <div class="container">
-        <div class="row" id="main-part">
+        <div class="row" id="level_buttons">
             <div class="col">
-                    <button class="btn btn-lg btn-primary" id="easy-btn">Easy</button>
-                    <button class="btn btn-lg btn-primary" id="medium-btn">Medium</button>
-                    <button class="btn btn-lg btn-primary" id="hard-btn">Hard</button>
-                    <button class="btn btn-lg btn-danger" id="start-btn">Start!</button>
+                <button class="btn btn-lg btn-primary" id="easy-btn">Easy</button>
+                <button class="btn btn-lg btn-primary" id="medium-btn">Medium</button>
+                <button class="btn btn-lg btn-primary" id="hard-btn">Hard</button>
+                <button class="btn btn-lg btn-danger" id="start-btn">Start!</button>
             </div>
 
-            <div id="level_description" class="col w-25 border border-primary border-3 rounded d-inline">
-                <p id="par">level description</p>
+            <div class="col" id="level_description">
+                <div id="level_description_pic">
+                    <img class="cefr_level w-75" src="./img/CEFR_Level.png">
+                </div>
+                <div id="level_description_exp" class="border border-primary border-3 rounded d-inline">
+                    <p id="par">Words are classified into three levels by following CEFR levels.<br><br>Read the descriptions and choose an appropriate level.</p>
+                </div>
             </div>
         </div>
     </div>
