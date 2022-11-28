@@ -454,7 +454,7 @@ restart_btn.addEventListener('click', e => {
 
 function is_input_valid(target_word_input) // input이 영어인지 확인
 {
-    if(target_word_input.value.length ===0)
+    if (target_word_input.value.length === 0)
         return true;
     let isalphabet = /^[a-z|A-Z]+$/;
     if (!isalphabet.test(target_word_input.value)) {
@@ -496,12 +496,7 @@ function openTooltip(selector, layer) {
 
         var $this = $(selector);
 
-        // 마우스 떠날시 툴팁 레이어 숨김
-        $this.on("", function () {
-            if (!$layer.hasClass('on')) {
-                $(this).next(layer).hide();
-            }
-        })
+
         // 한글 입력 시 툴팁 레이어 노출
         $this.on('click', function () {
             if (!is_input_valid(document.getElementById('setting_target_word_input'))) {
