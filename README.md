@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=waving&color=auto&height=100&section=header&text=Hang-Man&fontSize=40)
+![header](https://capsule-render.vercel.app/api?type=slice&color=auto&height=100&section=header&text=Hang-Man&fontSize=40)
 
 ### OSSP TEAM 3 MEMBER
 
