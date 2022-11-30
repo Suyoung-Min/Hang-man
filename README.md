@@ -33,5 +33,9 @@ Guess a word, phrase by suggesting letters within a certain number of guesses.
 ## Stack
 ---
 
+We do not use other framework. Just HTML, CSS, JavaScript.
+
+![stack_img](./img/download.png)
+
 
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=0:8dc73f,100:2e4e3f&height=200&section=footer)
