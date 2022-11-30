@@ -156,6 +156,10 @@ function game_over() {
         }
     }
 
+    let tmp_div_2 = document.createElement('h4');
+    tmp_div_2.innerText = 'Answer: ' + target_word;
+    game_result_div.appendChild(tmp_div_2);
+
     if (success_flag) {
         console.log('game success!');
         tmp_div.innerText = 'You win the game in ' + try_num + ' tries';
@@ -189,6 +193,8 @@ function game_over() {
             }
             to_share_text += '\n\n';
         }
+
+        to_share_text += 'The answer is ' + target_word + '!\n\n';
 
         to_share_text += window.location.href;
 

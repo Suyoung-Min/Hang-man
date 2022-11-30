@@ -6,16 +6,21 @@
   </a></p>
 <br>
 
+## Thumbnail will be added
+
 ---
 ## Navigation
 
+- [Thumbnail will be added](#thumbnail-will-be-added)
 - [Navigation](#navigation)
 - [OSSP TEAM 3 MEMBER](#ossp-team-3-member)
 - [Introduction](#introduction)
 - [Main Menu](#main-menu)
 - [In Game](#in-game)
 - [Hosting](#hosting)
+- [Installation](#installation)
 - [Stack](#stack)
+- [Link for Presentation](#link-for-presentation)
 ---
 ## OSSP TEAM 3 MEMBER
 <br>
@@ -37,8 +42,8 @@ Guess a word, phrase by suggesting letters within a certain number of guesses.
 ---
 ## Main Menu
 
-<div style='text-align:center;'>
-<img src='./img/readme_img/main_menu_img.png' style='width:400px;'></div>
+<p align='center'>
+<img src='./img/readme_img/main_menu_img.png' style='width:400px;'></p>
 
 Main menu has 2 options to set word to in_game.
 > 1. Custom word
@@ -53,13 +58,56 @@ The word will be randomly selected from parsed.json made by web crawling.
 
 By setting the target word from Main Menu, game will start.
 
+<p align='center'>
+<img src='./img/readme_img/in_game_1.png' style='width:400px;'></p>
+
+If the user chooses the letter that is included in the word, The letter is filled in the square at the position of the letter in the word, and the letter is not selectable.
+
+<p align='center'>
+<img src='./img/readme_img/in_game_2.png' style='width:400px;'></p>
+
+Conversely, if you choose a letter that is not included in a word,  
+the opportunity decreases and the key of the wrong word turns red and user cannot choose.  
+And the image on the masked word begins to diminish.
+
+<p align='center'>
+<img src='./img/readme_img/in_game_3.png' style='width:400px;'></p>
+
+If user find all the letters of the word with the number of attempts left,  
+the game ends with the user's victory.
+
+<p align='center'>
+<img src='./img/readme_img/in_game_4.png' style='width:400px;'></p>
+
+Conversely, if a word is not found within the number of attempts, the picture disappears and the user loses.
+
+<p align='center'>
+<img src='./img/readme_img/in_game_5.png' style='width:400px;'></p>
+
+At the end of the game, user can use the share function, which shows how user found the word, and answer. And allows user to copy the result to the clipboard so that user can share it with others.
+
+<p align='center'>
+<img src='./img/readme_img/in_game_6.png' style='width:400px;'></p>
+
+The result can be shared by Kakaotalk, or other chat program.
+
+<p align='center'>
+<img src='./img/readme_img/in_game_7.png' style='width:300px;'></p>
+
 ---
 ## Hosting
 
+<br>
 This project is hosted by GitHub Page Hosting.
 
 https://suyoung-min.github.io/Hang-man/
 
+---
+## Installation
+
+<br>
+This project don't use other framework, or special library.  
+Therefore, it is immediately available without any other installation process.
 
 ---
 ## Stack
@@ -67,8 +115,12 @@ https://suyoung-min.github.io/Hang-man/
 We do not use other framework. Just HTML, CSS, JavaScript.
 
 <br>
-<img src='./img/readme_img/stack_img.png' style="height: 200px; width:400px">
+<p align='center'>
+<img src='./img/readme_img/stack_img.png' style="height: 200px; width:400px"></p>
 
 ---
+## Link for Presentation
+
+Link will be added
 
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=0:8dc73f,100:2e4e3f&height=200&section=footer)
