@@ -106,17 +106,20 @@ https://suyoung-min.github.io/Hang-man/
 ## Installation
 
 <br>
-This project don't use other framework, or special library.  
+This project use bootstrap 5.2.2, jquery 3.6.1 by CDN.
 Therefore, it is immediately available without any other installation process.
 
 ---
 ## Stack
 
-We do not use other framework. Just HTML, CSS, JavaScript.
+We use HTML, CSS, JavaScript, Bootstrap, jQuery.
 
 <br>
 <p align='center'>
 <img src='./img/readme_img/stack_img.png' style="height: 200px; width:400px"></p>
+<p align='center'>
+<img src='./img/readme_img/bootstrap_img.png' style="height: 200px; width:200px">
+<img src='./img/readme_img/jquery_img.png' style="height: 200px; width:200px"></p>
 
 ---
 ## Link for Presentation
