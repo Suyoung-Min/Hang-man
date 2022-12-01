@@ -75,13 +75,13 @@ function in_game_key_event(input_char) { // Upper alphabet만 들어왔다고 �
     if (!key_correct_flag) { // 틀리면
         remaining_try -= 1;
         document.getElementById("trial").innerText = "Remained Trial: " + remaining_try;
-        if (remaining_try === 6) document.getElementById("hangman_image").src = "./img/hangman_6.png";
-        else if (remaining_try === 5) document.getElementById("hangman_image").src = "./img/hangman_5.png";
-        else if (remaining_try === 4) document.getElementById("hangman_image").src = "./img/hangman_4.png";
-        else if (remaining_try === 3) document.getElementById("hangman_image").src = "./img/hangman_3.png";
-        else if (remaining_try === 2) document.getElementById("hangman_image").src = "./img/hangman_2.png";
-        else if (remaining_try === 1) document.getElementById("hangman_image").src = "./img/hangman_1.png";
-        else if (remaining_try === 0) document.getElementById("hangman_image").src = "";
+        if (remaining_try === 6) document.getElementById("hangman_image").src = "./img/hangman_7.png";
+        else if (remaining_try === 5) document.getElementById("hangman_image").src = "./img/hangman_6.png";
+        else if (remaining_try === 4) document.getElementById("hangman_image").src = "./img/hangman_5.png";
+        else if (remaining_try === 3) document.getElementById("hangman_image").src = "./img/hangman_4.png";
+        else if (remaining_try === 2) document.getElementById("hangman_image").src = "./img/hangman_3.png";
+        else if (remaining_try === 1) document.getElementById("hangman_image").src = "./img/hangman_2.png";
+        else if (remaining_try === 0) document.getElementById("hangman_image").src = "./img/hangman_1.png";
         target_key.css({
             'background-color': 'rgb(232, 61, 88)',
             'color': 'white',
@@ -301,7 +301,7 @@ function init_game_seq() {
     remaining_try = 7; //남은 시도 횟수
     try_num = 0; //시도한 횟수
     game_result = []; //게임 과정 저장
-    document.getElementById("hangman_image").src = "./img/hangman_7.png";
+    document.getElementById("hangman_image").src = "./img/hangman_8.png";
     document.getElementById("trial").innerText = "Remained Trial: " + remaining_try;
 }
 
