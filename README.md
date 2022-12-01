@@ -130,4 +130,6 @@ We use HTML, CSS, JavaScript, Bootstrap, jQuery.
 
 https://youtu.be/-9tQc1o688E
 
+우수 프로젝트 시상 프로그램에 지원합니다
+
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=0:8dc73f,100:2e4e3f&height=200&section=footer)
