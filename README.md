@@ -13,7 +13,7 @@
 ---
 ## Navigation
 
-- [Thumbnail will be added](#thumbnail-will-be-added)
+- [Thumbnail](#thumbnail)
 - [Navigation](#navigation)
 - [OSSP TEAM 3 MEMBER](#ossp-team-3-member)
 - [Introduction](#introduction)
@@ -58,7 +58,8 @@ The word will be randomly selected from parsed.json made by web crawling.
 ---
 ## In Game
 
-By setting the target word from Main Menu, game will start.
+By setting the target word from Main Menu, game will start.  
+And an empty guillotine appears on the main screen.
 
 <p align='center'>
 <img src='./img/readme_img/in_game_1.png' style='width:400px;'></p>
@@ -70,7 +71,8 @@ If the user chooses the letter that is included in the word, The letter is fille
 
 Conversely, if you choose a letter that is not included in a word,  
 the opportunity decreases and the key of the wrong word turns red and user cannot choose.  
-And the image on the masked word begins to diminish.
+And a picture is added to the guillotine.
+
 
 <p align='center'>
 <img src='./img/readme_img/in_game_3.png' style='width:400px;'></p>
@@ -81,7 +83,7 @@ the game ends with the user's victory.
 <p align='center'>
 <img src='./img/readme_img/in_game_4.png' style='width:400px;'></p>
 
-Conversely, if a word is not found within the number of attempts, the picture disappears and the user loses.
+Conversely, if a word is not found within the number of attempts, the hang-man is made and the user loses.
 
 <p align='center'>
 <img src='./img/readme_img/in_game_5.png' style='width:400px;'></p>
