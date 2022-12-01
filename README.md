@@ -6,7 +6,9 @@
   </a></p>
 <br>
 
-## Thumbnail will be added
+## Thumbnail
+<p align='center'>
+<img src='./thumbnail.png' style='width:256px;'></p>
 
 ---
 ## Navigation
