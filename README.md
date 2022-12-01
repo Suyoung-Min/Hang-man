@@ -8,7 +8,7 @@
 
 ## Thumbnail
 <p align='center'>
-<img src='./img/readme_img/thumbnail.png' style='width:256px;'></p>
+<img src='./thumbnail.png' style='width:256px;'></p>
 
 ---
 ## Navigation
